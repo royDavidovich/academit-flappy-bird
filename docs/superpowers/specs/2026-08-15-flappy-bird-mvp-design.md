@@ -19,6 +19,7 @@ Exact Unity 6.3 editor identifier, build target, third-party asset restrictions,
 - **State management:** `GameManager` singleton (course Session 3 pattern — static access point, duplicate-prevention in `Awake`), owning an explicit `Ready → Playing → GameOver → Ready` state enum and the score value.
 - **Visuals:** placeholder primitives/sprites (colored shapes) for MVP. Real art is a later, separate pass gated on asset-rights verification.
 - **Orientation:** landscape 16:9 (`RECOMMENDATION`, default — Unity's standard aspect, simplest desktop dev/test loop; revisit if the rubric specifies otherwise).
+- **Render pipeline:** URP (Unity 6's current default 2D project template pulls in `com.unity.render-pipelines.universal`). Not originally planned but not a course-rule conflict; accepted as-is rather than recreating the project on a bare-Core template.
 
 ## Project structure
 
