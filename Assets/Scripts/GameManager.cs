@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
         Score = 0;
         CurrentState = GameState.Playing;
+        Time.timeScale = 1f;
         OnScoreChanged?.Invoke(Score);
         OnStateChanged?.Invoke(CurrentState);
     }
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
         if (CurrentState != GameState.Playing) return;
 
         CurrentState = GameState.GameOver;
+        Time.timeScale = 0f;
         OnStateChanged?.Invoke(CurrentState);
     }
 }
