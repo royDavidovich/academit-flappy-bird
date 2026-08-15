@@ -3,15 +3,21 @@ using UnityEngine.InputSystem;
 
 public class BirdController : MonoBehaviour
 {
-    [SerializeField] float flapImpulse = 5f;
-    [SerializeField] float gravityScale = 2.5f;
+    [SerializeField] GameConfig config;
 
     Rigidbody2D _rb;
+    CircleCollider2D _collider;
     InputAction _flapAction;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<CircleCollider2D>();
+
+        // Sprite's native diameter is 1 world unit, so scaling by radius*2 keeps the
+        // visual exactly equal to the hitbox. Decoupling these makes hits look unfair.
+        _collider.radius = config.BirdRadius;
+        transform.localScale = Vector3.one * (config.BirdRadius * 2f);
 
         _flapAction = new InputAction(type: InputActionType.Button);
         _flapAction.AddBinding("<Keyboard>/space");
@@ -60,7 +66,7 @@ public class BirdController : MonoBehaviour
 
     void Flap()
     {
-        _rb.linearVelocity = Vector2.up * flapImpulse;
+        _rb.linearVelocity = Vector2.up * config.FlapImpulse;
     }
 
     void HandleStateChanged(GameState state)
@@ -68,7 +74,7 @@ public class BirdController : MonoBehaviour
         switch (state)
         {
             case GameState.Playing:
-                _rb.gravityScale = gravityScale;
+                _rb.gravityScale = config.GravityScale;
                 break;
             case GameState.GameOver:
                 _rb.linearVelocity = Vector2.zero;

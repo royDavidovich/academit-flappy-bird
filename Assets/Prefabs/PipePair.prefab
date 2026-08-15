@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 1575357664336052338}
   - component: {fileID: 2946064308899577270}
   - component: {fileID: 4187970189290200211}
+  - component: {fileID: 2451008816276505424}
   m_Layer: 0
   m_Name: PipePair
   m_TagString: Untagged
@@ -304,8 +305,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ae36290dc4c8e41aacaa71266c015e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeMover
-  moveSpeed: 3
-  despawnX: -10
+--- !u!114 &2451008816276505424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630287586227649743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e732b9c187271408462ca4523ef7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PipePair
+  topPipe: {fileID: 3416312985718659637}
+  bottomPipe: {fileID: 7957970216529942200}
+  scoreZone: {fileID: 2773861816591482946}
 --- !u!1 &8854081460349255946
 GameObject:
   m_ObjectHideFlags: 0

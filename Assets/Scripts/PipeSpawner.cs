@@ -3,9 +3,7 @@ using UnityEngine;
 public class PipeSpawner : MonoBehaviour
 {
     [SerializeField] GameObject pipePairPrefab;
-    [SerializeField] float spawnInterval = 1.5f;
-    [SerializeField] float spawnX = 9f;
-    [SerializeField] float gapYRange = 2f;
+    [SerializeField] GameConfig config;
 
     void Start()
     {
@@ -24,7 +22,7 @@ public class PipeSpawner : MonoBehaviour
     {
         if (state == GameState.Playing)
         {
-            InvokeRepeating(nameof(SpawnPipe), 0f, spawnInterval);
+            InvokeRepeating(nameof(SpawnPipe), 0f, config.SpawnInterval);
         }
         else
         {
@@ -34,7 +32,12 @@ public class PipeSpawner : MonoBehaviour
 
     void SpawnPipe()
     {
-        float gapY = Random.Range(-gapYRange, gapYRange);
-        Instantiate(pipePairPrefab, new Vector3(spawnX, gapY, 0f), Quaternion.identity);
+        float gapY = Random.Range(-config.GapYRange, config.GapYRange);
+        GameObject pipe = Instantiate(pipePairPrefab, new Vector3(config.SpawnX, gapY, 0f), Quaternion.identity);
+
+        // Config is injected rather than serialized on the prefab: a prefab asset
+        // cannot hold a reference to a scene object.
+        pipe.GetComponent<PipePair>().Init(config);
+        pipe.GetComponent<PipeMover>().Init(config);
     }
 }

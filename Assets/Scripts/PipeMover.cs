@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PipeMover : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 3f;
-    [SerializeField] float despawnX = -10f;
-
+    GameConfig _config;
     Rigidbody2D _rb;
 
     void Awake()
@@ -12,11 +10,18 @@ public class PipeMover : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    public void Init(GameConfig config)
+    {
+        _config = config;
+    }
+
     void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + Vector2.left * moveSpeed * Time.fixedDeltaTime);
+        if (_config == null) return;
 
-        if (_rb.position.x < despawnX)
+        _rb.MovePosition(_rb.position + Vector2.left * _config.MoveSpeed * Time.fixedDeltaTime);
+
+        if (_rb.position.x < _config.DespawnX)
         {
             Destroy(gameObject);
         }
