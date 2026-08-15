@@ -9,9 +9,9 @@ public class GameConfig : MonoBehaviour
 
     [Header("Bird Rotation")]
     [SerializeField] float maxRiseAngle = 25f;
-    [SerializeField] float maxDiveAngle = 70f;
-    [SerializeField] float diveVelocity = 8f;
-    [SerializeField] float rotationSpeed = 8f;
+    [SerializeField] float maxDiveAngle = 25f;
+    [SerializeField] float diveVelocity = 5f;
+    [SerializeField] float rotationSpeed = 5f;
 
     [Header("Pipes")]
     [SerializeField] float moveSpeed = 3f;
