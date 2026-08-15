@@ -7,6 +7,12 @@ public class GameConfig : MonoBehaviour
     [SerializeField] float gravityScale = 2.5f;
     [SerializeField] float birdRadius = 0.5f;
 
+    [Header("Bird Rotation")]
+    [SerializeField] float maxRiseAngle = 25f;
+    [SerializeField] float maxDiveAngle = 70f;
+    [SerializeField] float diveVelocity = 8f;
+    [SerializeField] float rotationSpeed = 8f;
+
     [Header("Pipes")]
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float despawnX = -10f;
@@ -20,6 +26,10 @@ public class GameConfig : MonoBehaviour
     public float FlapImpulse => flapImpulse;
     public float GravityScale => gravityScale;
     public float BirdRadius => birdRadius;
+    public float MaxRiseAngle => maxRiseAngle;
+    public float MaxDiveAngle => maxDiveAngle;
+    public float DiveVelocity => diveVelocity;
+    public float RotationSpeed => rotationSpeed;
     public float MoveSpeed => moveSpeed;
     public float DespawnX => despawnX;
     public float SpawnInterval => spawnInterval;

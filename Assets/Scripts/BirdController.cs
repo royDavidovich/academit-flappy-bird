@@ -64,6 +64,18 @@ public class BirdController : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        if (GameManager.Instance.CurrentState != GameState.Playing) return;
+
+        // Purely cosmetic: a CircleCollider2D is rotation-invariant, so tilting the
+        // bird cannot change what it collides with.
+        float t = Mathf.InverseLerp(-config.DiveVelocity, config.FlapImpulse, _rb.linearVelocity.y);
+        float targetAngle = Mathf.Lerp(-config.MaxDiveAngle, config.MaxRiseAngle, t);
+        Quaternion target = Quaternion.Euler(0f, 0f, targetAngle);
+        transform.rotation = Quaternion.Lerp(transform.rotation, target, config.RotationSpeed * Time.deltaTime);
+    }
+
     void Flap()
     {
         _rb.linearVelocity = Vector2.up * config.FlapImpulse;

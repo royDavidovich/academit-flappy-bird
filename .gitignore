@@ -71,3 +71,7 @@ FR2_Cache.asset
 # User Settings are meant to be personal
 UserSettings
 UserSettings/*
+
+# Editor debug screenshots
+Assets/Screenshots/
+Assets/Screenshots.meta
