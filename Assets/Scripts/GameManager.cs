@@ -1,0 +1,62 @@
+using System;
+using UnityEngine;
+
+public enum GameState
+{
+    Ready,
+    Playing,
+    GameOver
+}
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    public GameState CurrentState { get; private set; } = GameState.Ready;
+    public int Score { get; private set; }
+
+    public event Action<GameState> OnStateChanged;
+    public event Action<int> OnScoreChanged;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    void Start()
+    {
+        OnStateChanged?.Invoke(CurrentState);
+    }
+
+    public void StartGame()
+    {
+        if (CurrentState != GameState.Ready) return;
+
+        Score = 0;
+        CurrentState = GameState.Playing;
+        OnScoreChanged?.Invoke(Score);
+        OnStateChanged?.Invoke(CurrentState);
+    }
+
+    public void AddScore(int amount = 1)
+    {
+        if (CurrentState != GameState.Playing) return;
+
+        Score += amount;
+        OnScoreChanged?.Invoke(Score);
+    }
+
+    public void GameOver()
+    {
+        if (CurrentState != GameState.Playing) return;
+
+        CurrentState = GameState.GameOver;
+        OnStateChanged?.Invoke(CurrentState);
+    }
+}
