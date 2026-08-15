@@ -16,6 +16,9 @@ public class GameConfig : MonoBehaviour
     [Header("Pipes")]
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float despawnX = -10f;
+    [SerializeField] float pipeWidth = 2f;
+    [SerializeField] float pipeHeight = 20f;
+    [SerializeField] float capHeight = 1f;
 
     [Header("Spawning")]
     [SerializeField] float spawnInterval = 1.5f;
@@ -32,6 +35,9 @@ public class GameConfig : MonoBehaviour
     public float RotationSpeed => rotationSpeed;
     public float MoveSpeed => moveSpeed;
     public float DespawnX => despawnX;
+    public float PipeWidth => pipeWidth;
+    public float PipeHeight => pipeHeight;
+    public float CapHeight => capHeight;
     public float SpawnInterval => spawnInterval;
     public float SpawnX => spawnX;
     public float GapYRange => gapYRange;
