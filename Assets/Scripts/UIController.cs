@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour
         GameManager.Instance.OnStateChanged += HandleStateChanged;
         GameManager.Instance.OnScoreChanged += HandleScoreChanged;
         restartButton.onClick.AddListener(Restart);
+
+        HandleStateChanged(GameManager.Instance.CurrentState);
+        HandleScoreChanged(GameManager.Instance.Score);
     }
 
     void OnDisable()

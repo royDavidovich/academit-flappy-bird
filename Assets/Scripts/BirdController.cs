@@ -73,6 +73,7 @@ public class BirdController : MonoBehaviour
             case GameState.GameOver:
                 _rb.linearVelocity = Vector2.zero;
                 _rb.gravityScale = 0f;
+                _rb.simulated = false;
                 break;
         }
     }
