@@ -6,12 +6,17 @@ public class GameConfig : MonoBehaviour
     [SerializeField] float flapImpulse = 6f;
     [SerializeField] float gravityScale = 2.5f;
     [SerializeField] float birdRadius = 0.5f;
+    // Toucan_0's opaque pixels only reach 5px above/below the pivot out of an 8px
+    // half-frame (measured from the source sprite), so the hitbox must be smaller
+    // than the visual sprite or it registers hits past the drawn bird.
+    [SerializeField] float hitboxScale = 0.625f;
 
     [Header("Bird Rotation")]
     [SerializeField] float maxRiseAngle = 25f;
     [SerializeField] float maxDiveAngle = 25f;
     [SerializeField] float diveVelocity = 5f;
-    [SerializeField] float rotationSpeed = 5f;
+    [SerializeField] float riseRotationSpeed = 12f;
+    [SerializeField] float diveRotationSpeed = 4f;
 
     [Header("Pipes")]
     [SerializeField] float moveSpeed = 3f;
@@ -29,10 +34,12 @@ public class GameConfig : MonoBehaviour
     public float FlapImpulse => flapImpulse;
     public float GravityScale => gravityScale;
     public float BirdRadius => birdRadius;
+    public float HitboxScale => hitboxScale;
     public float MaxRiseAngle => maxRiseAngle;
     public float MaxDiveAngle => maxDiveAngle;
     public float DiveVelocity => diveVelocity;
-    public float RotationSpeed => rotationSpeed;
+    public float RiseRotationSpeed => riseRotationSpeed;
+    public float DiveRotationSpeed => diveRotationSpeed;
     public float MoveSpeed => moveSpeed;
     public float DespawnX => despawnX;
     public float PipeWidth => pipeWidth;

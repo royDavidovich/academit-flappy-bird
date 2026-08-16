@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,9 +6,12 @@ public class BirdController : MonoBehaviour
 {
     [SerializeField] GameConfig config;
 
+    public event Action OnFlap;
+
     Rigidbody2D _rb;
     CircleCollider2D _collider;
     InputAction _flapAction;
+    float _tiltAngle;
 
     void Awake()
     {
@@ -15,8 +19,11 @@ public class BirdController : MonoBehaviour
         _collider = GetComponent<CircleCollider2D>();
 
         // Sprite's native diameter is 1 world unit, so scaling by radius*2 keeps the
-        // visual exactly equal to the hitbox. Decoupling these makes hits look unfair.
-        _collider.radius = config.BirdRadius;
+        // visual bird sized as tuned. The hitbox is intentionally smaller than that:
+        // the toucan's opaque pixels don't fill the full square frame, so a circle
+        // matching the frame size would register hits before the drawn bird touches
+        // anything. HitboxScale is measured from the actual sprite content.
+        _collider.radius = config.BirdRadius * config.HitboxScale;
         transform.localScale = Vector3.one * (config.BirdRadius * 2f);
 
         _flapAction = new InputAction(type: InputActionType.Button);
@@ -72,13 +79,20 @@ public class BirdController : MonoBehaviour
         // bird cannot change what it collides with.
         float t = Mathf.InverseLerp(-config.DiveVelocity, config.FlapImpulse, _rb.linearVelocity.y);
         float targetAngle = Mathf.Lerp(-config.MaxDiveAngle, config.MaxRiseAngle, t);
-        Quaternion target = Quaternion.Euler(0f, 0f, targetAngle);
-        transform.rotation = Quaternion.Lerp(transform.rotation, target, config.RotationSpeed * Time.deltaTime);
+
+        // The rise target is only momentarily at its peak right after a flap impulse,
+        // then gravity pulls it back down immediately, while the dive target saturates
+        // and holds. A single shared speed lets the dive fully catch up but never the
+        // rise, so rising and falling are blended at different rates on purpose.
+        float speed = targetAngle > _tiltAngle ? config.RiseRotationSpeed : config.DiveRotationSpeed;
+        _tiltAngle = Mathf.Lerp(_tiltAngle, targetAngle, speed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0f, 0f, _tiltAngle);
     }
 
     void Flap()
     {
         _rb.linearVelocity = Vector2.up * config.FlapImpulse;
+        OnFlap?.Invoke();
     }
 
     void HandleStateChanged(GameState state)
