@@ -18,3 +18,14 @@ per `COURSE_CONSTITUTION.md` ("Keep third-party content isolated and record its 
 
 The pack is original artwork inspired by the Flappy Bird genre. It does not contain assets
 extracted from the original game.
+
+## Press Start 2P
+
+- **Folder:** `Assets/3rd Party/PressStart2P/`
+- **Author:** Cody "CodeMan38" Boisclair
+- **Source:** [fontspace.com/press-start-2p-font-f11591](https://www.fontspace.com/press-start-2p-font-f11591) (also distributed via Google Fonts)
+- **License:** SIL Open Font License (OFL) — free for personal and commercial use, modification,
+  and embedding; the font file itself may not be sold on its own. Full text preserved verbatim
+  in `PressStart2P/LICENSE.txt`.
+- **Contents used:** `PressStart2P.ttf`, used to generate the TMP font asset
+  `PressStart2P SDF.asset` applied to all UI text (title, score, Game Over, restart).
