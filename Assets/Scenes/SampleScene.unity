@@ -1598,10 +1598,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=64>Flappy Bird</size>
+  m_text: '<size=84>Flappy Bird</size>
 
 
-    <size=28>Press Space to Start</size>'
+    <size=48>Press Space to Start</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
