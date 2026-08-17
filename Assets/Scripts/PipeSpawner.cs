@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject pipePairPrefab;
-    [SerializeField] GameConfig config;
+    [SerializeField] private GameObject pipePairPrefab;
+    [SerializeField] private GameConfig config;
 
-    void Start()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += HandleStateChanged;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (GameManager.Instance != null)
         {
@@ -18,7 +18,7 @@ public class PipeSpawner : MonoBehaviour
         }
     }
 
-    void HandleStateChanged(GameState state)
+    private void HandleStateChanged(GameState state)
     {
         if (state == GameState.Playing)
         {
@@ -30,7 +30,7 @@ public class PipeSpawner : MonoBehaviour
         }
     }
 
-    void SpawnPipe()
+    private void SpawnPipe()
     {
         float gapY = Random.Range(-config.GapYRange, config.GapYRange);
         GameObject pipe = Instantiate(pipePairPrefab, new Vector3(config.SpawnX, gapY, 0f), Quaternion.identity);

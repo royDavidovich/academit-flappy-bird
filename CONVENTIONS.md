@@ -14,7 +14,8 @@ Conventions for all C# code in this Unity project. Keep new and substantially-ch
 - `PascalCase` for classes, structs, interfaces, enums, delegates, methods, properties, events, local functions.
 - Prefix interfaces with `I` (e.g. `IDamageable`).
 - `camelCase` for local variables and parameters.
-- `_camelCase` for private instance fields.
+- `_camelCase` for private instance fields that are **not** Inspector-serialized.
+- Plain `camelCase` (no underscore) for `[SerializeField]` fields — keeps the underscore signal reserved for non-serialized private state.
 - `s_camelCase` for private static fields.
 - `PascalCase` for constants.
 - Nouns for values/objects, verbs or verb phrases for methods.
@@ -25,6 +26,7 @@ Conventions for all C# code in this Unity project. Keep new and substantially-ch
 
 ```csharp
 // GOOD
+[SerializeField] private int startingLives;
 private int _remainingLives;
 private static int s_activeInstanceCount;
 public bool IsAlive => _remainingLives > 0;
@@ -45,9 +47,9 @@ private bool eGameState;
 - Don't casually rename serialized fields, public APIs, Unity messages, or referenced types.
 
 ```csharp
-[SerializeField] private float _moveSpeed = 5f;
+[SerializeField] private float moveSpeed = 5f;
 
-public float MoveSpeed => _moveSpeed;
+public float MoveSpeed => moveSpeed;
 ```
 
 ## Formatting and layout
@@ -146,7 +148,7 @@ public enum InputFlags
 ```csharp
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth = 3;
+    [SerializeField] private int maxHealth = 3;
 
     private int _currentHealth;
 
@@ -156,7 +158,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = maxHealth;
     }
 
     public void TakeDamage(int amount)

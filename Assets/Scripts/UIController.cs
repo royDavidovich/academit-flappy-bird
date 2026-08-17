@@ -5,14 +5,14 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameObject readyPanel;
-    [SerializeField] GameObject playingHud;
-    [SerializeField] GameObject gameOverPanel;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text finalScoreText;
-    [SerializeField] Button restartButton;
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private GameObject playingHud;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private Button restartButton;
 
-    void Start()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += HandleStateChanged;
         GameManager.Instance.OnScoreChanged += HandleScoreChanged;
@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
         HandleScoreChanged(GameManager.Instance.Score);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (GameManager.Instance != null)
         {
@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void HandleStateChanged(GameState state)
+    private void HandleStateChanged(GameState state)
     {
         readyPanel.SetActive(state == GameState.Ready);
         playingHud.SetActive(state == GameState.Playing);
@@ -43,12 +43,12 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void HandleScoreChanged(int score)
+    private void HandleScoreChanged(int score)
     {
         scoreText.text = score.ToString();
     }
 
-    void Restart()
+    private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

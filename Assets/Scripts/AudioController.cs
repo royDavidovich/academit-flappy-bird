@@ -3,16 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] BirdController bird;
+    [SerializeField] private BirdController bird;
 
-    const int SampleRate = 44100;
+    private const int SampleRate = 44100;
 
-    AudioSource _source;
-    AudioClip _flapClip;
-    AudioClip _scoreClip;
-    AudioClip _hitClip;
+    private AudioSource _source;
+    private AudioClip _flapClip;
+    private AudioClip _scoreClip;
+    private AudioClip _hitClip;
 
-    void Awake()
+    private void Awake()
     {
         _source = GetComponent<AudioSource>();
         _flapClip = GenerateTone(600f, 0.08f, 0.5f, square: false);
@@ -20,7 +20,7 @@ public class AudioController : MonoBehaviour
         _hitClip = GenerateTone(110f, 0.25f, 0.5f, square: true);
     }
 
-    void Start()
+    private void Start()
     {
         // GameManager.Instance is only guaranteed to exist once every object's Awake
         // has run; OnEnable doesn't carry that guarantee, so subscribing here (not
@@ -30,7 +30,7 @@ public class AudioController : MonoBehaviour
         GameManager.Instance.OnStateChanged += HandleStateChanged;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         bird.OnFlap -= PlayFlap;
         if (GameManager.Instance != null)
@@ -40,21 +40,27 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    void PlayFlap() => _source.PlayOneShot(_flapClip);
+    private void PlayFlap() => _source.PlayOneShot(_flapClip);
 
-    void HandleScoreChanged(int score)
+    private void HandleScoreChanged(int score)
     {
         // GameManager also fires this on StartGame() to reset the HUD to 0;
         // only a real cleared pipe (score > 0) should play the chime.
-        if (score > 0) _source.PlayOneShot(_scoreClip);
+        if (score > 0)
+        {
+            _source.PlayOneShot(_scoreClip);
+        }
     }
 
-    void HandleStateChanged(GameState state)
+    private void HandleStateChanged(GameState state)
     {
-        if (state == GameState.GameOver) _source.PlayOneShot(_hitClip);
+        if (state == GameState.GameOver)
+        {
+            _source.PlayOneShot(_hitClip);
+        }
     }
 
-    static AudioClip GenerateTone(float frequency, float duration, float volume, bool square)
+    private static AudioClip GenerateTone(float frequency, float duration, float volume, bool square)
     {
         int sampleCount = Mathf.CeilToInt(SampleRate * duration);
         var data = new float[sampleCount];
@@ -65,7 +71,7 @@ public class AudioController : MonoBehaviour
         return clip;
     }
 
-    static AudioClip GenerateChime()
+    private static AudioClip GenerateChime()
     {
         int n1 = Mathf.CeilToInt(SampleRate * 0.08f);
         int n2 = Mathf.CeilToInt(SampleRate * 0.1f);
@@ -80,7 +86,7 @@ public class AudioController : MonoBehaviour
 
     // Writes `count` samples of a sine or square wave into `data` starting at `offset`,
     // with a linear fade-out so the clip doesn't end in an audible click.
-    static void FillTone(float[] data, int offset, int count, float frequency, float volume, bool square)
+    private static void FillTone(float[] data, int offset, int count, float frequency, float volume, bool square)
     {
         for (int i = 0; i < count; i++)
         {

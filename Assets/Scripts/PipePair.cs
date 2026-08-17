@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PipePair : MonoBehaviour
 {
-    [SerializeField] Transform topPipe;
-    [SerializeField] Transform bottomPipe;
-    [SerializeField] SpriteRenderer topBody;
-    [SerializeField] SpriteRenderer bottomBody;
-    [SerializeField] SpriteRenderer topCap;
-    [SerializeField] SpriteRenderer bottomCap;
-    [SerializeField] BoxCollider2D topCollider;
-    [SerializeField] BoxCollider2D bottomCollider;
-    [SerializeField] BoxCollider2D scoreZone;
+    [SerializeField] private Transform topPipe;
+    [SerializeField] private Transform bottomPipe;
+    [SerializeField] private SpriteRenderer topBody;
+    [SerializeField] private SpriteRenderer bottomBody;
+    [SerializeField] private SpriteRenderer topCap;
+    [SerializeField] private SpriteRenderer bottomCap;
+    [SerializeField] private BoxCollider2D topCollider;
+    [SerializeField] private BoxCollider2D bottomCollider;
+    [SerializeField] private BoxCollider2D scoreZone;
 
     public void Init(GameConfig config)
     {
@@ -22,7 +22,7 @@ public class PipePair : MonoBehaviour
 
     // Everything is measured outward from the gap edge, so the visible pipe mouth
     // always lands exactly on the gap regardless of pipe or cap height.
-    void BuildPipe(Transform pipe, SpriteRenderer body, SpriteRenderer cap, BoxCollider2D collider, GameConfig config, float gapEdge, float direction)
+    private void BuildPipe(Transform pipe, SpriteRenderer body, SpriteRenderer cap, BoxCollider2D collider, GameConfig config, float gapEdge, float direction)
     {
         pipe.localPosition = new Vector3(0f, gapEdge, 0f);
         pipe.localScale = Vector3.one;

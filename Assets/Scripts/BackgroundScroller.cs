@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
-    [SerializeField] Transform[] pieces;
-    [SerializeField] float scrollSpeed = 0.8f;
+    [SerializeField] private Transform[] pieces;
+    [SerializeField] private float scrollSpeed = 0.8f;
 
-    float _pieceWidth;
-    bool _scrolling;
-    Camera _cam;
+    private float _pieceWidth;
+    private bool _scrolling;
+    private Camera _cam;
 
-    void Awake()
+    private void Awake()
     {
         _cam = Camera.main;
         var sr = pieces[0].GetComponent<SpriteRenderer>();
         _pieceWidth = sr.bounds.size.x;
     }
 
-    void Start()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += HandleStateChanged;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (GameManager.Instance != null)
         {
@@ -29,14 +29,17 @@ public class BackgroundScroller : MonoBehaviour
         }
     }
 
-    void HandleStateChanged(GameState state)
+    private void HandleStateChanged(GameState state)
     {
         _scrolling = state == GameState.Playing;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!_scrolling) return;
+        if (!_scrolling)
+        {
+            return;
+        }
 
         float delta = scrollSpeed * Time.deltaTime;
         float cameraLeftEdge = _cam.transform.position.x - _cam.orthographicSize * _cam.aspect;
@@ -46,8 +49,15 @@ public class BackgroundScroller : MonoBehaviour
         foreach (var piece in pieces)
         {
             piece.position += Vector3.left * delta;
-            if (piece.position.x < leftmost.position.x) leftmost = piece;
-            if (piece.position.x > rightmost.position.x) rightmost = piece;
+            if (piece.position.x < leftmost.position.x)
+            {
+                leftmost = piece;
+            }
+
+            if (piece.position.x > rightmost.position.x)
+            {
+                rightmost = piece;
+            }
         }
 
         // Once the trailing piece's right edge clears the camera's left bound it has

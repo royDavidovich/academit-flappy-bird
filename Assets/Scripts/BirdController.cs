@@ -4,17 +4,17 @@ using UnityEngine.InputSystem;
 
 public class BirdController : MonoBehaviour
 {
-    [SerializeField] GameConfig config;
+    [SerializeField] private GameConfig config;
 
     public event Action OnFlap;
 
-    Rigidbody2D _rb;
-    CircleCollider2D _collider;
-    InputAction _flapAction;
-    float _tiltAngle;
-    bool _skipNextInputFrame;
+    private Rigidbody2D _rb;
+    private CircleCollider2D _collider;
+    private InputAction _flapAction;
+    private float _tiltAngle;
+    private bool _skipNextInputFrame;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CircleCollider2D>();
@@ -33,7 +33,7 @@ public class BirdController : MonoBehaviour
         _flapAction.AddBinding("<Touchscreen>/primaryTouch/press");
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         _flapAction.Enable();
         // Guards against a real-world gotcha, not a test artifact: entering Play mode is
@@ -44,7 +44,7 @@ public class BirdController : MonoBehaviour
         _skipNextInputFrame = true;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         _flapAction.Disable();
         if (GameManager.Instance != null)
@@ -53,17 +53,17 @@ public class BirdController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         GameManager.Instance.OnStateChanged += HandleStateChanged;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         _flapAction.Dispose();
     }
 
-    void Update()
+    private void Update()
     {
         if (_skipNextInputFrame)
         {
@@ -71,7 +71,10 @@ public class BirdController : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance.CurrentState == GameState.GameOver) return;
+        if (GameManager.Instance.CurrentState == GameState.GameOver)
+        {
+            return;
+        }
 
         if (_flapAction.WasPressedThisFrame())
         {
@@ -84,9 +87,12 @@ public class BirdController : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (GameManager.Instance.CurrentState != GameState.Playing) return;
+        if (GameManager.Instance.CurrentState != GameState.Playing)
+        {
+            return;
+        }
 
         // Purely cosmetic: a CircleCollider2D is rotation-invariant, so tilting the
         // bird cannot change what it collides with.
@@ -102,13 +108,13 @@ public class BirdController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, _tiltAngle);
     }
 
-    void Flap()
+    private void Flap()
     {
         _rb.linearVelocity = Vector2.up * config.FlapImpulse;
         OnFlap?.Invoke();
     }
 
-    void HandleStateChanged(GameState state)
+    private void HandleStateChanged(GameState state)
     {
         switch (state)
         {
@@ -123,7 +129,7 @@ public class BirdController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         GameManager.Instance.GameOver();
     }

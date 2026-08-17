@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public event Action<GameState> OnStateChanged;
     public event Action<int> OnScoreChanged;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -29,14 +29,17 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         OnStateChanged?.Invoke(CurrentState);
     }
 
     public void StartGame()
     {
-        if (CurrentState != GameState.Ready) return;
+        if (CurrentState != GameState.Ready)
+        {
+            return;
+        }
 
         Score = 0;
         CurrentState = GameState.Playing;
@@ -47,7 +50,10 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int amount = 1)
     {
-        if (CurrentState != GameState.Playing) return;
+        if (CurrentState != GameState.Playing)
+        {
+            return;
+        }
 
         Score += amount;
         OnScoreChanged?.Invoke(Score);
@@ -55,7 +61,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (CurrentState != GameState.Playing) return;
+        if (CurrentState != GameState.Playing)
+        {
+            return;
+        }
 
         CurrentState = GameState.GameOver;
         Time.timeScale = 0f;

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PipeMover : MonoBehaviour
 {
-    GameConfig _config;
-    Rigidbody2D _rb;
+    private GameConfig _config;
+    private Rigidbody2D _rb;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
@@ -15,9 +15,12 @@ public class PipeMover : MonoBehaviour
         _config = config;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (_config == null) return;
+        if (_config == null)
+        {
+            return;
+        }
 
         _rb.MovePosition(_rb.position + Vector2.left * _config.MoveSpeed * Time.fixedDeltaTime);
 
