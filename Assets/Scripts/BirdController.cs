@@ -12,6 +12,7 @@ public class BirdController : MonoBehaviour
     CircleCollider2D _collider;
     InputAction _flapAction;
     float _tiltAngle;
+    bool _skipNextInputFrame;
 
     void Awake()
     {
@@ -35,6 +36,12 @@ public class BirdController : MonoBehaviour
     void OnEnable()
     {
         _flapAction.Enable();
+        // Guards against a real-world gotcha, not a test artifact: entering Play mode is
+        // usually triggered by clicking the Editor's Play button with the mouse, and the
+        // Input System can occasionally deliver that click as a buffered "pressed this
+        // frame" event once the flap action (bound to the left mouse button) starts
+        // listening, causing an unintended flap before the player does anything.
+        _skipNextInputFrame = true;
     }
 
     void OnDisable()
@@ -58,6 +65,12 @@ public class BirdController : MonoBehaviour
 
     void Update()
     {
+        if (_skipNextInputFrame)
+        {
+            _skipNextInputFrame = false;
+            return;
+        }
+
         if (GameManager.Instance.CurrentState == GameState.GameOver) return;
 
         if (_flapAction.WasPressedThisFrame())

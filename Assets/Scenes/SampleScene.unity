@@ -155,7 +155,7 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
-    - _OutlineWidth: 0.35
+    - _OutlineWidth: 0.55
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
-  m_sharedMaterial: {fileID: 990229902}
+  m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_fontSharedMaterials:
   - {fileID: 216665790}
   m_fontMaterial: {fileID: 990229902}
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
-  m_sharedMaterial: {fileID: 1224798714}
+  m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_fontSharedMaterials:
   - {fileID: 196183506}
   m_fontMaterial: {fileID: 1224798714}
@@ -1334,7 +1334,7 @@ MonoBehaviour:
   birdRadius: 0.5
   hitboxScale: 0.625
   maxRiseAngle: 25
-  maxDiveAngle: 70
+  maxDiveAngle: 35
   diveVelocity: 8
   riseRotationSpeed: 8
   diveRotationSpeed: 8
@@ -1604,7 +1604,7 @@ MonoBehaviour:
     <size=28>Press Space to Start</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
-  m_sharedMaterial: {fileID: 702828934}
+  m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_fontSharedMaterials:
   - {fileID: 504136390}
   m_fontMaterial: {fileID: 702828934}
@@ -1719,7 +1719,7 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
-    - _OutlineWidth: 0.35
+    - _OutlineWidth: 0.55
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -2030,7 +2030,7 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
-    - _OutlineWidth: 0.35
+    - _OutlineWidth: 0.55
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -2188,7 +2188,7 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
-    - _OutlineWidth: 0.35
+    - _OutlineWidth: 0.55
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -2505,7 +2505,7 @@ MonoBehaviour:
   m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
-  m_sharedMaterial: {fileID: 30163594}
+  m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_fontSharedMaterials:
   - {fileID: 1317223848}
   m_fontMaterial: {fileID: 30163594}
@@ -2612,7 +2612,7 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0
-    - _OutlineWidth: 0.35
+    - _OutlineWidth: 0.55
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -2822,7 +2822,7 @@ MonoBehaviour:
   m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
-  m_sharedMaterial: {fileID: 1730536377}
+  m_sharedMaterial: {fileID: 3912541581881291959, guid: 28ea50533d58b4cbf9448044bedfe0da, type: 2}
   m_fontSharedMaterials:
   - {fileID: 1459055290}
   m_fontMaterial: {fileID: 1730536377}
